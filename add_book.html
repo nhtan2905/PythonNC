@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thêm sách</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            width: 400px;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #555;
+        }
+        form p {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        a {
+            text-decoration: none;
+            color: #007BFF;
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Thêm sách mới</h1>
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            <p>
+                <label>{{ form.title.label }}</label>
+                {{ form.title(class_="form-control") }}
+            </p>
+            <p>
+                <label>{{ form.author.label }}</label>
+                {{ form.author(class_="form-control") }}
+            </p>
+            <p>
+                <label>{{ form.genre.label }}</label>
+                {{ form.genre(class_="form-control") }}
+            </p>
+            <p>
+                <label>{{ form.publish_date.label }}</label>
+                {{ form.publish_date(class_="form-control") }}
+            </p>
+            <p>
+                <label>{{ form.quantity.label }}</label>
+                {{ form.quantity(class_="form-control") }}
+            </p>
+            <p>
+                <button type="submit">{{ form.submit.label.text }}</button>
+            </p>
+        </form>
+        <a href="{{ url_for('index') }}">Quay lại</a>
+    </div>
+</body>
+</html>

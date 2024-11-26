@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Đánh giá sách</title>
+</head>
+<body>
+    <h1>{{ book[1] }}</h1>
+    <form method="POST">
+        <input type="text" name="username" placeholder="Tên của bạn" required>
+        <input type="number" name="rating" placeholder="Đánh giá (1-5)" required>
+        <textarea name="comment" placeholder="Bình luận"></textarea>
+        <button type="submit">Gửi đánh giá</button>
+    </form>
+    <h2>Đánh giá hiện tại</h2>
+    <ul>
+        {% for review in reviews %}
+        <li>
+            <strong>{{ review[2] }}:</strong> {{ review[3] }} ({{ review[4] }})
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

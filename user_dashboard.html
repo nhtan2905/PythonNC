@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quản lý sách (User)</title>
+</head>
+<body>
+    <h1>User Dashboard</h1>
+    <h2>Danh sách sách</h2>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Tên sách</th>
+            <th>Tác giả</th>
+            <th>Thể loại</th>
+            <th>Ngày xuất bản</th>
+        </tr>
+        {% for book in books %}
+        <tr>
+            <td>{{ book[0] }}</td>
+            <td>{{ book[1] }}</td>
+            <td>{{ book[2] }}</td>
+            <td>{{ book[3] }}</td>
+            <td>{{ book[4] }}</td>
+            <td>
+                <a href="/review/{{ book[0] }}">Đánh giá</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

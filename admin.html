@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 20px;
+            text-align: center;
+        }
+        header a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        header a:hover {
+            text-decoration: underline;
+        }
+        main {
+            padding: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+            background: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table th, table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        table th {
+            background-color: #f2f2f2;
+        }
+        .actions a {
+            color: #007BFF;
+            text-decoration: none;
+            margin: 0 5px;
+        }
+        .actions a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Trang Quản trị Admin</h1>
+        <a href="/logout">Đăng xuất</a> | <a href="/admin/users">Quản lý tài khoản</a>
+    </header>
+    <main>
+        <!-- Thanh tìm kiếm -->
+        <form method="GET" action="/admin">
+            <label for="search">Tìm kiếm sách:</label>
+            <input type="text" id="search" name="search" placeholder="Nhập tên sách hoặc tác giả">
+            <button type="submit">Tìm kiếm</button>
+        </form>
+
+        <!-- Form thêm sách -->
+        <form method="POST" action="/admin">
+            <h3>Thêm sách mới</h3>
+            <label for="title">Tên sách:</label>
+            <input type="text" id="title" name="title" required>
+
+            <label for="author">Tác giả:</label>
+            <input type="text" id="author" name="author" required>
+
+            <label for="genre">Thể loại:</label>
+            <input type="text" id="genre" name="genre" required>
+
+            <label for="publish_date">Ngày xuất bản:</label>
+            <input type="date" id="publish_date" name="publish_date" required>
+
+            <label for="quantity">Số lượng:</label>
+            <input type="number" id="quantity" name="quantity" required>
+
+            <button type="submit">Thêm sách</button>
+        </form>
+
+        <!-- Danh sách sách -->
+        <h2>Danh sách Sách</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Tên sách</th>
+                    <th>Tác giả</th>
+                    <th>Thể loại</th>
+                    <th>Ngày xuất bản</th>
+                    <th>Số lượng</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in books %}
+                <tr>
+                    <td>{{ book[0] }}</td>
+                    <td>{{ book[1] }}</td>
+                    <td>{{ book[2] }}</td>
+                    <td>{{ book[3] }}</td>
+                    <td>{{ book[4] }}</td>
+                    <td>{{ book[5] }}</td>
+                    <td class="actions">
+                        <a href="/edit/{{ book[0] }}">Sửa</a> |
+                        <a href="/delete/{{ book[0] }}" onclick="return confirm('Bạn có chắc chắn muốn xóa không?')">Xóa</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Nút hiển thị ý kiến -->
+        <h2>Danh sách Phản hồi</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>User ID</th>
+                    <th>Nội dung</th>
+                    <th>Thời gian tạo</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for feedback in feedbacks %}
+                <tr>
+                    <td>{{ feedback[0] }}</td>
+                    <td>{{ feedback[1] }}</td>
+                    <td>{{ feedback[2] }}</td>
+                    <td>{{ feedback[3] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>
